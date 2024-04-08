@@ -65,6 +65,7 @@ export class BaseTypeMapper {
     }
     isLoading(typeName) {
         try {
+            // @ts-ignore
             return this.loading[typeName] ? true : false;
         }
         catch (e) {

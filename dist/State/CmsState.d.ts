@@ -1,4 +1,4 @@
-export declare type CmsState = {
+export type CmsState = {
     currentLanguage?: string;
 };
 export default CmsState;

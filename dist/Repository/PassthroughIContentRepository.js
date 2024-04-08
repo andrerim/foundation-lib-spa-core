@@ -36,8 +36,8 @@ export class PassthroughIContentRepository extends EventEmitter {
         return this._api.getContent(reference);
     }
     patch(reference, patch) {
-        var _a, _b;
         return __awaiter(this, void 0, void 0, function* () {
+            var _a, _b;
             try {
                 const item = yield this.load(reference);
                 if (!item)

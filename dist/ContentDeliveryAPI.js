@@ -124,8 +124,8 @@ export class ContentDeliveryAPI {
             return list[0];
         });
     }
-    getContent(content, forceGuid = false) {
-        return __awaiter(this, void 0, void 0, function* () {
+    getContent(content_1) {
+        return __awaiter(this, arguments, void 0, function* (content, forceGuid = false) {
             if (!(content && (content.guidValue || content.url))) {
                 if (this.config.enableDebug) {
                     console.warn('Loading content for an empty reference ', content);

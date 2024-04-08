@@ -1,5 +1,5 @@
 import Database from './Database';
-declare type IndexType = string | number | Date | ArrayBufferView | ArrayBuffer | IDBArrayKey;
+type IndexType = string | number | Date | ArrayBufferView | ArrayBuffer | IDBValidKey;
 export declare class Store<DataType = any> {
     private _storeName;
     private _database;

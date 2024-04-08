@@ -34,8 +34,8 @@ export class IContentRepository extends EventEmitter {
         super();
         this._loading = {};
         this._config = {
-            maxAge: 1440,
-            policy: IRepositoryPolicy.NetworkFirst,
+            maxAge: 1440, // Default keep for one day = 24 * 60 = 1440 minutes
+            policy: IRepositoryPolicy.NetworkFirst, // Default network first
             debug: false // Default to disabling debug mode
         };
         this.schemaUpgrade = (db) => __awaiter(this, void 0, void 0, function* () {
@@ -96,8 +96,8 @@ export class IContentRepository extends EventEmitter {
      * @param { boolean } recursive Whether or all referenced content must be loaded as well
      * @returns { Promise<IContent | null> }
      */
-    load(reference, recursive = false) {
-        return __awaiter(this, void 0, void 0, function* () {
+    load(reference_1) {
+        return __awaiter(this, arguments, void 0, function* (reference, recursive = false) {
             const localFirst = this._config.policy === IRepositoryPolicy.LocalStorageFirst ||
                 this._config.policy === IRepositoryPolicy.PreferOffline ||
                 !this._api.OnLine;
@@ -304,8 +304,8 @@ export class IContentRepository extends EventEmitter {
         });
         return (this._websitesLoading = internalLoad());
     }
-    getWebsite(hostname, language, matchWildCard = true) {
-        return __awaiter(this, void 0, void 0, function* () {
+    getWebsite(hostname_1, language_1) {
+        return __awaiter(this, arguments, void 0, function* (hostname, language, matchWildCard = true) {
             const lang = language || this._api.Language;
             this.debugMessage(`Loading website by host ${hostname} in language ${lang}; ${matchWildCard ? '' : 'not '}accepting the wildcard host`);
             const websites = yield this.getWebsites();
@@ -322,8 +322,8 @@ export class IContentRepository extends EventEmitter {
         catch (e) { /* Ignored on purpose */ }
         return this.getWebsite(hostname, undefined, true);
     }
-    ingestIContent(iContent, overwrite = true) {
-        return __awaiter(this, void 0, void 0, function* () {
+    ingestIContent(iContent_1) {
+        return __awaiter(this, arguments, void 0, function* (iContent, overwrite = true) {
             const table = yield this.getTable();
             const current = yield table.get(this.createStorageId(iContent, true));
             const isUpdate = (current === null || current === void 0 ? void 0 : current.data) ? true : false;
@@ -395,9 +395,9 @@ export class IContentRepository extends EventEmitter {
             guid: this._api.Language + '-' + iContent.contentLink.guidValue
         };
     }
-    recursiveLoad(iContent, recurseDown = false) {
-        var _a, _b, _c, _d;
-        return __awaiter(this, void 0, void 0, function* () {
+    recursiveLoad(iContent_1) {
+        return __awaiter(this, arguments, void 0, function* (iContent, recurseDown = false) {
+            var _a, _b, _c, _d;
             for (const key of Object.keys(iContent)) {
                 const p = iContent[key];
                 if (genericPropertyIsProperty(p))

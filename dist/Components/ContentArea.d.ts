@@ -1,7 +1,7 @@
 import React from 'react';
 import IEpiserverContext from '../Core/IEpiserverContext';
 import { ContentAreaProperty } from '../Property';
-export declare type ContentAreaSiteConfig = {
+export type ContentAreaSiteConfig = {
     /**
      * The bindings between the display options and CSS classes to apply
      *
@@ -67,7 +67,7 @@ export declare type ContentAreaSiteConfig = {
      */
     wrapperClass?: string;
 };
-export declare type ContentAreaProps = ContentAreaSiteConfig & {
+export type ContentAreaProps = ContentAreaSiteConfig & {
     /**
      * The ContentArea property from the IContent, which must be rendered by this
      * component.

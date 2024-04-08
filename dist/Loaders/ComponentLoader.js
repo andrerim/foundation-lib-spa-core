@@ -115,6 +115,7 @@ export class ComponentLoader {
         if (this.isPreLoaded(component))
             return Promise.resolve(this.getPreLoadedType(component));
         try {
+            // @ts-ignore
             if (this.loading[component]) {
                 return this.loading[component];
             }

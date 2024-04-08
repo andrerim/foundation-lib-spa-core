@@ -52,7 +52,7 @@ export const FetchAdapter = (config) => __awaiter(void 0, void 0, void 0, functi
         referrerPolicy: 'no-referrer',
         credentials: config.withCredentials ? "include" : "omit",
         method: config.method,
-        redirect: config.maxRedirects ? "follow" : "error",
+        redirect: config.maxRedirects ? "follow" : "error", // @ToDo: Implement the actual maximum number of redirects
         body: config.data,
         cache: 'no-store',
     };

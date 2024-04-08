@@ -9,7 +9,7 @@ import { IRepositoryConfig } from './Repository/IRepository';
 import { IComponentLoaderConfig } from './Loaders/ComponentLoader';
 import IContentDeliveryConfig from './ContentDelivery/Config';
 import { TypeMapperType } from './Loaders/BaseTypeMapper';
-export declare type AppConfig = {
+export type AppConfig = {
     /**
      * Enable debug logging to the console
      */

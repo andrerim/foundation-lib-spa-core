@@ -87,7 +87,7 @@ export class ContentDeliveryAPI {
         return this.doAdvancedRequest(this.AuthService, {
             method: "POST",
             data: request,
-            maxRedirects: 0,
+            maxRedirects: 0, // Fail on redirect
             transformRequest: (data, headers) => {
                 headers["Content-Type"] = "application/x-www-form-urlencoded";
                 return Object.entries(data).map(x => `${encodeURIComponent(x[0])}=${encodeURIComponent(x[1])}`).join('&');
@@ -364,15 +364,15 @@ export class ContentDeliveryAPI {
         const guidRegex = /^[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}$/;
         return apiId.match(guidRegex) ? true : false;
     }
-    doRequest(url, options = {}, addDefaultQueryParams = true) {
-        return __awaiter(this, void 0, void 0, function* () {
+    doRequest(url_1) {
+        return __awaiter(this, arguments, void 0, function* (url, options = {}, addDefaultQueryParams = true) {
             const [responseData, responseInfo] = yield this.doAdvancedRequest(url, options, addDefaultQueryParams);
             return responseData;
         });
     }
-    doAdvancedRequest(url, options = {}, addDefaultQueryParams = true, returnOnError = false) {
-        var _a, _b;
-        return __awaiter(this, void 0, void 0, function* () {
+    doAdvancedRequest(url_1) {
+        return __awaiter(this, arguments, void 0, function* (url, options = {}, addDefaultQueryParams = true, returnOnError = false) {
+            var _a, _b;
             // Pre-process URL
             const requestUrl = typeof (url) === "string" ? new URL(url, this.BaseURL) : url;
             if (addDefaultQueryParams) {
@@ -467,9 +467,9 @@ export class ContentDeliveryAPI {
     }
     getHeaders(customHeaders) {
         const defaultHeaders = {
-            'Accept': 'application/json',
-            'Accept-Language': this.Language,
-            'Content-Type': 'application/json',
+            'Accept': 'application/json', // Requested response data format
+            'Accept-Language': this.Language, // Requested language branch
+            'Content-Type': 'application/json', // Request data format
             'X-IContent-Language': this.Language // Requested language branch
         };
         if (!customHeaders)

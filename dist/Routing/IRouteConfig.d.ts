@@ -1,6 +1,8 @@
 import React from 'react';
 import { RouteProps, RouteComponentProps } from 'react-router';
-export interface IRouteConfigComponentProps<ParamsType = any> extends RouteComponentProps<ParamsType> {
+export interface IRouteConfigComponentProps<ParamsType extends {
+    [K in keyof ParamsType]?: string | undefined;
+}> extends RouteComponentProps<ParamsType> {
     routes?: IRouteConfig;
     path?: string;
 }
@@ -11,5 +13,5 @@ export interface IRouteConfigItem extends RouteProps {
     children?: ((props: IRouteConfigComponentProps<any>) => React.ReactNode) | React.ReactNode;
     routes?: IRouteConfigItem[];
 }
-declare type IRouteConfig = IRouteConfigItem[];
+type IRouteConfig = IRouteConfigItem[];
 export default IRouteConfig;
