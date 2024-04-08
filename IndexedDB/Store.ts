@@ -1,7 +1,6 @@
 import Database from './Database';
-import Transaction from './Transaction';
 
-type IndexType = string | number | Date | ArrayBufferView | ArrayBuffer | IDBArrayKey;
+type IndexType = string | number | Date | ArrayBufferView | ArrayBuffer | IDBValidKey;
 
 export class Store<DataType = any>
 {

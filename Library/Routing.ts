@@ -10,4 +10,4 @@ export type RouterProps = RoutingNS.RouterProps;
 export type ContentProps = RoutingNS.RoutedContentProps;
 export type IRoutingConfig = IRouteConfigBase;
 export type IRoutingItem   = IRouteConfigItemBase;
-export type RoutedComponentProps<T> = IRouteConfigComponentPropsBase<T>;
+export type RoutedComponentProps<T extends { [K in keyof T]?: string | undefined; }> = IRouteConfigComponentPropsBase<T>;

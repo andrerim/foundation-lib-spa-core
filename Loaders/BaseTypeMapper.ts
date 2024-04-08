@@ -65,7 +65,7 @@ export abstract class BaseTypeMapper {
     return new dataType(data);
   }
 
-  public getType(typeName: string, throwOnUnknown: boolean = true): IContentType | null {
+  public getType(typeName: string, throwOnUnknown = true): IContentType | null {
     if (this.isCached(typeName)) {
       return this.cache[typeName];
     }
@@ -86,6 +86,7 @@ export abstract class BaseTypeMapper {
 
   public isLoading(typeName: string): boolean {
     try {
+      // @ts-ignore
       return this.loading[typeName] ? true : false;
     } catch (e) {
       // Ignore exception

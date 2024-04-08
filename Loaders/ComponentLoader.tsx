@@ -157,6 +157,7 @@ export class ComponentLoader
             return Promise.resolve(this.getPreLoadedType(component) as ComponentType<P>);
         
         try {
+            // @ts-ignore
             if (this.loading[component]) {
                 return this.loading[component] as Promise<ComponentType<P>>;
             }
@@ -198,7 +199,7 @@ export class ComponentLoader
         return tryOption(0);
     }
 
-    public async LoadComponent<P = ComponentProps<IContent>>(component: string, props: P): Promise<React.ReactElement<P>>
+    public async LoadComponent<P extends ComponentProps<IContent>>(component: string, props: P): Promise<React.ReactElement<P>>
     {
         const type = await this.LoadType<P>(component);
         return React.createElement(type, props);
