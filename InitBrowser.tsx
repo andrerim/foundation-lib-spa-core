@@ -1,4 +1,3 @@
-import ReactDOM from "react-dom";
 import React from "react";
 import CmsSite from './Components/CmsSite';
 import AppConfig from './AppConfig';
@@ -7,6 +6,7 @@ import ComponentPreLoader, { IComponentPreloadList } from "./Loaders/ComponentPr
 import IServiceContainer from './Core/IServiceContainer';
 import DefaultServiceContainer from './Core/DefaultServiceContainer';
 import ServerContextType from './ServerSideRendering/ServerContext';
+import { createRoot, hydrateRoot } from "react-dom/client";
 
 declare let __INITIAL_DATA__ : ServerContextType;
 
@@ -34,11 +34,12 @@ function _doInitBrowser(config: AppConfig, containerId?: string, serviceContaine
         const loader = EpiContext.componentLoader();
         ComponentPreLoader.load(components, loader).finally(() => {
             if (EpiContext.isDebugActive()) console.info('Hydrating existing render, Stage 2. Hydration ...');
-            ReactDOM.hydrate(<CmsSite context={ EpiContext } />, container);
+            hydrateRoot(container, <CmsSite context={ EpiContext } />);
         });
     } else {
         if (EpiContext.isDebugActive()) console.info('Building new application');
-        ReactDOM.render(<CmsSite context={ EpiContext } />, container);
+        const root = createRoot(container as HTMLElement);
+        root.render(<CmsSite context={ EpiContext } />);
     }
 }
 
