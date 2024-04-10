@@ -43,14 +43,14 @@ export function Property<T extends IContent>(props: React.PropsWithChildren<Prop
 {
     const ctx = useEpiserver();
     if (!hasProperty(props.iContent, props.field.toString())) {
-        return ctx.isDebugActive() ? <div>Property <span>{ props.field }</span> not present</div> : null;
+        return ctx.isDebugActive() ? <div>Property <span>{ props.field.toString() }</span> not present</div> : null;
     }
     const prop = getProperty(props.iContent, props.field);
     const propType = isIContentProperty(prop) ? prop.propertyDataType : typeof(prop);
     let stringValue : string;
     switch (propType) {
         case 'string':
-            return isEditable(props.iContent, ctx) ? <span className={props.className} data-epi-edit={ props.field }>{ prop }</span> : (props.className ? <span className={ props.className }>{ prop }</span> : <>{ prop }</>);
+            return isEditable(props.iContent, ctx) ? <span className={props.className} data-epi-edit={ props.field }>{ prop as string }</span> : (props.className ? <span className={ props.className }>{ prop as string }</span> : <>{ prop }</>);
         case 'PropertyString':
         case 'PropertyLongString':
             stringValue = isIContentProperty(prop) ? (prop as IContentProperty<string>).value : '';

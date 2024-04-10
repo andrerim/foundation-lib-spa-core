@@ -22,7 +22,8 @@ import CmsCommunicator from './CmsCommunicator';
  */
 export interface CmsSiteProps {
     staticContext?: StaticRouterContext,
-    context: IEpiserverContext
+    context: IEpiserverContext,
+    children?: React.ReactNode,
 }
 
 export const EpiserverWebsite : React.FunctionComponent<CmsSiteProps> = (props) => {

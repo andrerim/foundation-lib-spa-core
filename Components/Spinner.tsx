@@ -7,6 +7,7 @@ import EpiContext from '../Spa';
  */
 export type SpinnerProps = {
 	timeout?: number
+	children?: React.ReactNode
 }
 
 /**

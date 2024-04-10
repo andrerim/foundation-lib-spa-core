@@ -34,7 +34,7 @@ export const Router : React.FunctionComponent<RouterProps> = (props) =>
 Router.displayName = "Optimizely CMS: Router";
 export default Router;
 
-const ElementNavigation : React.FunctionComponent = (props) : React.ReactElement => {
+const ElementNavigation : React.FunctionComponent<{ children: React.ReactNode}> = (props) : React.ReactElement => {
     const history = useHistory();
     const location = useLocation();
     const epi = useEpiserver();

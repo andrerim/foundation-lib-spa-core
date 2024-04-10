@@ -100,6 +100,8 @@ export type ContentAreaProps = ContentAreaSiteConfig & {
      * the content-area.
      */
     propertyName?: string
+
+    children?: React.ReactNode,
 }
 
 export const ContentArea : React.FunctionComponent<ContentAreaProps> = (props) => {
