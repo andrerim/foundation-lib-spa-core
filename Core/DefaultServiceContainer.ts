@@ -19,7 +19,7 @@ export default class DefaultServiceContainer implements IServiceContainer
         try {
             return (service as unknown as IContextAwareService).setContext && typeof((service as unknown as IContextAwareService).setContext) === "function";
         } catch (e) {
-            // Intentionally ignore errors
+            // Intentionally ignore errors awdawd
         }
         return false;
     }
