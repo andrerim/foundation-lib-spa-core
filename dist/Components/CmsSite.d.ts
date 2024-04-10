@@ -7,6 +7,7 @@ import IEpiserverContext from '../Core/IEpiserverContext';
 export interface CmsSiteProps {
     staticContext?: StaticRouterContext;
     context: IEpiserverContext;
+    children?: React.ReactNode;
 }
 export declare const EpiserverWebsite: React.FunctionComponent<CmsSiteProps>;
 export default EpiserverWebsite;

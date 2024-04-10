@@ -8,7 +8,7 @@ export function Property(props) {
     if (!hasProperty(props.iContent, props.field.toString())) {
         return ctx.isDebugActive() ? React.createElement("div", null,
             "Property ",
-            React.createElement("span", null, props.field),
+            React.createElement("span", null, props.field.toString()),
             " not present") : null;
     }
     const prop = getProperty(props.iContent, props.field);

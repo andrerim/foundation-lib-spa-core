@@ -1,9 +1,9 @@
-import ReactDOM from "react-dom";
 import React from "react";
 import CmsSite from './Components/CmsSite';
 import EpiContext from './Spa';
 import ComponentPreLoader from "./Loaders/ComponentPreLoader";
 import DefaultServiceContainer from './Core/DefaultServiceContainer';
+import { createRoot, hydrateRoot } from "react-dom/client";
 export function InitBrowser(config, containerId, serviceContainer) {
     try {
         if ((__INITIAL_DATA__ === null || __INITIAL_DATA__ === void 0 ? void 0 : __INITIAL_DATA__.status) === 'loading') {
@@ -27,13 +27,14 @@ function _doInitBrowser(config, containerId, serviceContainer) {
         ComponentPreLoader.load(components, loader).finally(() => {
             if (EpiContext.isDebugActive())
                 console.info('Hydrating existing render, Stage 2. Hydration ...');
-            ReactDOM.hydrate(React.createElement(CmsSite, { context: EpiContext }), container);
+            hydrateRoot(container, React.createElement(CmsSite, { context: EpiContext }));
         });
     }
     else {
         if (EpiContext.isDebugActive())
             console.info('Building new application');
-        ReactDOM.render(React.createElement(CmsSite, { context: EpiContext }), container);
+        const root = createRoot(container);
+        root.render(React.createElement(CmsSite, { context: EpiContext }));
     }
 }
 export default InitBrowser;

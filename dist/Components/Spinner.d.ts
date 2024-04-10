@@ -1,9 +1,10 @@
-import { ComponentType, ReactElement } from 'react';
+import React, { ComponentType, ReactElement } from 'react';
 /**
  * The property definition for a spinner
  */
 export type SpinnerProps = {
     timeout?: number;
+    children?: React.ReactNode;
 };
 /**
  * Interface definition of the instance type of a Spinner
