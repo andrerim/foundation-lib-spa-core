@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import * as RoutingNS from '../Routing/EpiSpaRouter';
-import IRouteConfigBase, { IRouteConfigItem as IRouteConfigItemBase, IRouteConfigComponentProps as IRouteConfigComponentPropsBase } from '../Routing/IRouteConfig';
+import IRouteConfigBase, { IRouteConfigItem as IRouteConfigItemBase } from '../Routing/IRouteConfig';
 /**
  * Routing capability
  */
@@ -10,6 +10,3 @@ export type RouterProps = RoutingNS.RouterProps;
 export type ContentProps = RoutingNS.RoutedContentProps;
 export type IRoutingConfig = IRouteConfigBase;
 export type IRoutingItem = IRouteConfigItemBase;
-export type RoutedComponentProps<T extends {
-    [K in keyof T]?: string | undefined;
-}> = IRouteConfigComponentPropsBase<T>;

@@ -10,6 +10,7 @@ export class StateModule extends BaseInitializableModule {
         /**
          * Return the standard state reducer for the CMS Status
          */
+        // @ts-ignore
         this.GetStateReducer = () => CmsStateReducer;
     }
     StartModule(context) {
@@ -19,7 +20,9 @@ export class StateModule extends BaseInitializableModule {
         const cfg = context.serviceContainer.getService(DefaultServices.Config);
         const cdAPI = context.serviceContainer.getService(DefaultServices.ContentDeliveryAPI_V2);
         // Setup CD-API Language to respond to the state changes.
-        Tools.observeStore(store, (x) => { var _a; return ((_a = x === null || x === void 0 ? void 0 : x.OptiContentCloud) === null || _a === void 0 ? void 0 : _a.currentLanguage) || cfg.defaultLanguage; }, (newValue) => {
+        Tools.observeStore(
+        // @ts-ignore
+        store, (x) => { var _a; return ((_a = x === null || x === void 0 ? void 0 : x.OptiContentCloud) === null || _a === void 0 ? void 0 : _a.currentLanguage) || cfg.defaultLanguage; }, (newValue) => {
             if (newValue)
                 cdAPI.Language = newValue;
         });

@@ -1,18 +1,18 @@
 import React, { useState, useEffect, FunctionComponent } from 'react';
-import { RouteComponentProps } from 'react-router';
 
 import { useEpiserver, useIContentRepository, useServerSideRendering } from '../Hooks/Context';
 import { ContentReference, ContentLinkService } from '../Models/ContentLink';
 import IContent from '../Models/IContent';
 import { IContentRenderer } from './EpiComponent';
 import { Spinner } from './Spinner';
+import { useLocation } from 'react-router';
 
-export const RoutedComponent : FunctionComponent<RouteComponentProps> = (props: RouteComponentProps) =>
+export const RoutedComponent: FunctionComponent = () =>
 {
     const epi = useEpiserver();
     const repo = useIContentRepository();
     const ssr = useServerSideRendering();
-    const path = props.location.pathname;
+    const path = useLocation().pathname;
     const [iContent, setIContent] = useState<IContent | null>(ssr.getIContentByPath(path));
     const debug = epi.isDebugActive();
     const lang = epi.Language;
@@ -62,7 +62,7 @@ export const RoutedComponent : FunctionComponent<RouteComponentProps> = (props: 
     }, [ repo, debug, lang, iContent]);
 
     if (iContent === null) return <Spinner />
-    return <IContentRenderer data={ iContent } path={ props.location.pathname } />
+    return <IContentRenderer data={ iContent } path={ path } />
 }
 RoutedComponent.displayName = "Optimizely CMS: Path IContent resolver";
 export default RoutedComponent;

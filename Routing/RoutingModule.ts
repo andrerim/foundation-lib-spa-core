@@ -6,7 +6,7 @@ import RoutedComponent from '../Components/RoutedComponent';
 
 export default class RoutingModule extends BaseInitializableModule implements IInitializableModule
 {
-    protected name : string = "Episerver CMS Routing";
+    protected name = "Episerver CMS Routing";
     public readonly SortOrder : number = 20;
     
     /**
@@ -19,7 +19,7 @@ export default class RoutingModule extends BaseInitializableModule implements II
     public ConfigureContainer(container: IServiceContainer) : void
     {
         const config = container.getService<AppConfig>(DefaultServices.Config);
-        let haveStar : boolean = false;
+        let haveStar = false;
         config.routes = config.routes || [];
         config.routes.forEach(c => haveStar = haveStar || c.path === "*");
         if (!haveStar) config.routes.push({

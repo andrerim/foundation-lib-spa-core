@@ -4,6 +4,7 @@ type Middlewares<S> = ReadonlyArray<Middleware<{}, S>>;
 
 export function observeStore<T = any, S = any, A extends Action<any> = AnyAction, M extends Middlewares<S> = Middlewares<S>>
 (   
+    // @ts-ignore
     store: EnhancedStore<S, A, M>, 
     select: (state: S) => T, 
     onChange: (state: T) => void
@@ -23,7 +24,7 @@ export function observeStore<T = any, S = any, A extends Action<any> = AnyAction
     handleChange();
     return unsubscribe;
 }
-
+// @ts-ignore
 export function setLanguage<S = any, A extends Action<any> = AnyAction, M extends Middlewares<S> = Middlewares<S>>(newLanguage: string, store: EnhancedStore<S,A,M>) : void
 {
     const action : A = {

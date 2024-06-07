@@ -1,4 +1,4 @@
-import { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosTransformer, Method } from 'axios';
+import { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosRequestTransformer, Method } from 'axios';
 import IContentDeliveryAPi, { IContentDeliveryResponse, IContentDeliverySearchResults } from './IContentDeliveryAPI';
 import ContentDeliveryApiConfig from './Config';
 import Website from '../Models/Website';
@@ -84,7 +84,7 @@ export declare class ContentDeliveryAPI implements IContentDeliveryAPi {
     search<T extends IContent = IContent>(query: string, orderBy: string, skip?: number, top?: number, personalized?: boolean, select?: string[], expand?: string[]): Promise<IContentDeliverySearchResults<T>>;
     getAncestors(id: ContentReference, select?: string[], expand?: string[]): Promise<IContent[]>;
     getChildren(id: ContentReference, select?: string[], expand?: string[]): Promise<IContent[]>;
-    invoke<TypeOut extends unknown = any, TypeIn extends unknown = any>(content: ContentReference, method: string, verb?: Method, data?: TypeIn, requestTransformer?: AxiosTransformer): Promise<ActionResponse<TypeOut | NetworkErrorData, IContent>>;
+    invoke<TypeOut extends unknown = any, TypeIn extends unknown = any>(content: ContentReference, method: string, verb?: Method, data?: TypeIn, requestTransformer?: AxiosRequestTransformer): Promise<ActionResponse<TypeOut | NetworkErrorData, IContent>>;
     isServiceURL(url: URL | string): boolean;
     raw<TypeOut>(url: string | URL, options?: Partial<AxiosRequestConfig>, addDefaultQueryParams?: boolean): Promise<IContentDeliveryResponse<TypeOut | NetworkErrorData>>;
     protected apiIdIsGuid(apiId: string): boolean;

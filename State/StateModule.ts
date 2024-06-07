@@ -22,6 +22,7 @@ export class StateModule extends BaseInitializableModule implements IInitializab
 
         // Setup CD-API Language to respond to the state changes.
         Tools.observeStore<string, CmsAppState>(
+            // @ts-ignore
             store, 
             (x) => x?.OptiContentCloud?.currentLanguage || cfg.defaultLanguage,
             (newValue) => {
@@ -44,6 +45,7 @@ export class StateModule extends BaseInitializableModule implements IInitializab
     /**
      * Return the standard state reducer for the CMS Status
      */
+    // @ts-ignore
     public GetStateReducer : () => IStateReducerInfo<any> = () => CmsStateReducer;
 }
 

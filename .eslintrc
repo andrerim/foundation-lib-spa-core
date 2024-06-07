@@ -2,8 +2,7 @@
     "root": true,
     "parser": "@typescript-eslint/parser",
     "plugins": [
-      "@typescript-eslint",
-      "react-hooks"
+      "@typescript-eslint"
     ],
     "rules": {
       "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
@@ -12,6 +11,7 @@
     "extends": [
       "eslint:recommended",
       "plugin:@typescript-eslint/eslint-recommended",
-      "plugin:@typescript-eslint/recommended"
+      "plugin:@typescript-eslint/recommended",
+      "plugin:react-hooks/recommended"
     ]
   }

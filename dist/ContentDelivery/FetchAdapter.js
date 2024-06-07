@@ -25,12 +25,14 @@ const isCachesAvailable = cachesAvailable();
  * A basic implementation of an AxiosAdapter to let Axios use the Fetch API to
  * retrieve content.
  *
- * @param   { AxiosRequestConfig }  config  The request configuration given by the implementing code
+ * @param   { InternalAxiosRequestConfig  }  config  The request configuration given by the implementing code
  * @returns { Promise<AxiosResponse> }      The response of the Fetch API Call
  */
 export const FetchAdapter = (config) => __awaiter(void 0, void 0, void 0, function* () {
     const userAgent = 'Axios-Fetch-Adapter/0.0.1';
-    const requestUrl = new URL(config.url || '', config.baseURL);
+    const hostToUse = (window.location && window.location.host) || config.baseURL || '';
+    const requestUrl = new URL(config.url || '');
+    requestUrl.host = hostToUse;
     if (config.auth) {
         requestUrl.username = config.auth.username;
         requestUrl.password = config.auth.password;

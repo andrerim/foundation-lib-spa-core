@@ -17,12 +17,12 @@ import { ResponseType } from '../Models/ActionResponse';
 import { networkErrorToOAuthError } from './IAuthService';
 export class ContentDeliveryAPI {
     constructor(config) {
-        this.ContentService = 'api/episerver/v2.0/content/';
-        this.SiteService = 'api/episerver/v2.0/site/';
+        this.ContentService = 'api/episerver/v3.0/content/';
+        this.SiteService = 'api/episerver/v3.0/site/';
         this.MethodService = 'api/episerver/v3/action/';
         this.AuthService = 'api/episerver/auth/token';
         this.ModelService = 'api/episerver/v3/model/';
-        this.SearchService = 'api/episerver/v2.0/search/content';
+        this.SearchService = 'api/episerver/v3.0/search/content';
         this.errorCounter = 0;
         this._config = Object.assign(Object.assign({}, DefaultConfig), config);
         this._axiosStatic = Axios;

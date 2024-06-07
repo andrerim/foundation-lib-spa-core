@@ -1,4 +1,4 @@
-import Axios, {  AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosStatic, AxiosTransformer, Method } from 'axios';
+import Axios, {  AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosStatic, AxiosRequestTransformer, Method } from 'axios';
 import * as UUID from 'uuid';
 import IContentDeliveryAPi, { IContentDeliveryResponse, IContentDeliveryResponseContext, IContentDeliverySearchResults, isNetworkError } from './IContentDeliveryAPI';
 import ContentDeliveryApiConfig, { DefaultConfig } from './Config';
@@ -13,12 +13,12 @@ import IAuthTokenProvider from './IAuthTokenProvider';
 
 export class ContentDeliveryAPI implements IContentDeliveryAPi
 {
-    public readonly ContentService: string = 'api/episerver/v2.0/content/';
-    public readonly SiteService: string    = 'api/episerver/v2.0/site/';
+    public readonly ContentService: string = 'api/episerver/v3.0/content/';
+    public readonly SiteService: string    = 'api/episerver/v3.0/site/';
     public readonly MethodService: string  = 'api/episerver/v3/action/';
     public readonly AuthService: string    = 'api/episerver/auth/token';
     public readonly ModelService: string   = 'api/episerver/v3/model/';
-    public readonly SearchService: string  = 'api/episerver/v2.0/search/content';
+    public readonly SearchService: string  = 'api/episerver/v3.0/search/content';
 
     private _config : ContentDeliveryApiConfig;
     private _axios : AxiosInstance;
@@ -325,7 +325,7 @@ export class ContentDeliveryAPI implements IContentDeliveryAPi
         return this.doRequest<IContent[]>(url).then(r => isNetworkError(r) ? [r] : r).catch(e => [this.createNetworkErrorResponse(e)]);
     }
 
-    public async invoke<TypeOut extends unknown = any, TypeIn extends unknown = any>(content: ContentReference, method: string, verb?: Method, data?: TypeIn, requestTransformer?: AxiosTransformer): Promise<ActionResponse<TypeOut | NetworkErrorData, IContent>>
+    public async invoke<TypeOut extends unknown = any, TypeIn extends unknown = any>(content: ContentReference, method: string, verb?: Method, data?: TypeIn, requestTransformer?: AxiosRequestTransformer): Promise<ActionResponse<TypeOut | NetworkErrorData, IContent>>
     {
         if (!this._config.EnableExtensions) return Promise.reject('Extensions must be enabled to use the invoke method');
 
@@ -334,7 +334,7 @@ export class ContentDeliveryAPI implements IContentDeliveryAPi
         const url = new URL(this.MethodService + apiId + '/' + method, this.BaseURL);
 
         // Default JSON Transformer for request data
-        const defaultTransformer : AxiosTransformer = (reqData, reqHeaders) => {
+        const defaultTransformer : AxiosRequestTransformer = (reqData, reqHeaders) => {
             if (reqData) {
                 reqHeaders['Content-Type'] = 'application/json';
                 return JSON.stringify(reqData);

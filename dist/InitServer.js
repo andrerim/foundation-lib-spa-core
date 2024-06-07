@@ -2,7 +2,6 @@
 import getGlobal from './AppGlobal';
 // Global Libraries && Poly-fills
 import ReactDOMServer from 'react-dom/server';
-import { Helmet } from 'react-helmet';
 import React from 'react';
 import DefaultServiceContainer from './Core/DefaultServiceContainer';
 import EpiSpaContext from './Spa';
@@ -16,20 +15,20 @@ export default function RenderServerSide(config, serviceContainer) {
     serviceContainer = serviceContainer || new DefaultServiceContainer();
     config.enableSpinner = false;
     config.noAjax = true;
-    config.enableDebug = true;
+    config.enableDebug = false;
     EpiSpaContext.init(config, serviceContainer, true);
-    const staticContext = {};
-    const body = ReactDOMServer.renderToString(React.createElement(CmsSite, { context: EpiSpaContext, staticContext: staticContext }));
-    const meta = Helmet.renderStatic();
+    const helmetContext = {};
+    const body = ReactDOMServer.renderToString(React.createElement(CmsSite, { context: EpiSpaContext, helmetContext: helmetContext }));
+    const { helmet } = helmetContext;
     return {
         Body: body,
-        HtmlAttributes: meta.htmlAttributes.toString(),
-        Title: meta.title.toString(),
-        Meta: meta.meta.toString(),
-        Link: meta.link.toString(),
-        Script: meta.script.toString(),
-        Style: meta.style.toString(),
-        BodyAttributes: meta.bodyAttributes.toString()
+        HtmlAttributes: helmet === null || helmet === void 0 ? void 0 : helmet.htmlAttributes.toString(),
+        Title: helmet === null || helmet === void 0 ? void 0 : helmet.title.toString(),
+        Meta: helmet === null || helmet === void 0 ? void 0 : helmet.meta.toString(),
+        Link: helmet === null || helmet === void 0 ? void 0 : helmet.link.toString(),
+        Script: helmet === null || helmet === void 0 ? void 0 : helmet.script.toString(),
+        Style: helmet === null || helmet === void 0 ? void 0 : helmet.style.toString(),
+        BodyAttributes: helmet === null || helmet === void 0 ? void 0 : helmet.bodyAttributes.toString()
     };
 }
 //# sourceMappingURL=InitServer.js.map

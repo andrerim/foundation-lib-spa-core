@@ -3,9 +3,8 @@ import getGlobal from './AppGlobal';
 
 // Global Libraries && Poly-fills
 import ReactDOMServer from 'react-dom/server';
-import { Helmet } from 'react-helmet';
+import { HelmetServerState } from 'react-helmet-async';
 import React from 'react';
-import { StaticRouterContext } from 'react-router';
 
 // Episerver Libraries
 import IServiceContainer from './Core/IServiceContainer';
@@ -28,21 +27,24 @@ export default function RenderServerSide(config: AppConfig, serviceContainer?: I
     serviceContainer = serviceContainer || new DefaultServiceContainer();
     config.enableSpinner = false;
     config.noAjax = true;
-    config.enableDebug = true;
+    config.enableDebug = false;
     EpiSpaContext.init(config, serviceContainer, true);
 
-    const staticContext : StaticRouterContext = {};
-    const body = ReactDOMServer.renderToString(<CmsSite context={ EpiSpaContext } staticContext={ staticContext } />);
-    const meta = Helmet.renderStatic();
+    const helmetContext: {
+        helmet?: HelmetServerState;
+    } = {};
+
+    const body = ReactDOMServer.renderToString(<CmsSite context={ EpiSpaContext } helmetContext={helmetContext} />);
+    const { helmet } = helmetContext;
 
     return {
         Body: body,
-        HtmlAttributes: meta.htmlAttributes.toString(),
-        Title: meta.title.toString(),
-        Meta: meta.meta.toString(),
-        Link: meta.link.toString(),
-        Script: meta.script.toString(),
-        Style: meta.style.toString(),
-        BodyAttributes: meta.bodyAttributes.toString()
+        HtmlAttributes: helmet?.htmlAttributes.toString(),
+        Title: helmet?.title.toString(),
+        Meta: helmet?.meta.toString(),
+        Link: helmet?.link.toString(),
+        Script: helmet?.script.toString(),
+        Style: helmet?.style.toString(),
+        BodyAttributes: helmet?.bodyAttributes.toString()
     };
 }

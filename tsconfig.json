@@ -12,7 +12,8 @@
     "lib": ["ES6", "DOM", "DOM.Iterable"],
     "removeComments": false,
     "sourceMap": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true
   },
   "exclude": ["node_modules", "tests", "dist"]
 }

@@ -1,4 +1,4 @@
-import { Method, AxiosTransformer, AxiosRequestConfig } from 'axios';
+import { Method, AxiosRequestTransformer, AxiosRequestConfig } from 'axios';
 import ActionResponse from '../Models/ActionResponse';
 import { ContentReference } from '../Models/ContentLink';
 import IContent from '../Models/IContent';
@@ -194,7 +194,7 @@ export type IContentDeliveryAPI = {
      * @param   { AxiosTransformer }    requestTransformer  The transformer to add the data to the request, defaults to JSON Serialization
      * @returns { Promise<ActionResponse<TypeOut>> }    The response from the service
      */
-    invoke<TypeOut extends unknown = any, TypeIn extends unknown = any>(content: ContentReference, method: string, verb?: Method, data?: TypeIn, requestTransformer?: AxiosTransformer): Promise<ActionResponse<TypeOut | NetworkErrorData>>;
+    invoke<TypeOut extends unknown = any, TypeIn extends unknown = any>(content: ContentReference, method: string, verb?: Method, data?: TypeIn, requestTransformer?: AxiosRequestTransformer): Promise<ActionResponse<TypeOut | NetworkErrorData>>;
     /**
      * Enable raw access to the Episerver installation to perform authenticated calls to the system
      *

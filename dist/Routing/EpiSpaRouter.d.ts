@@ -1,11 +1,12 @@
 import React from 'react';
-import { StaticRouterProps, SwitchProps } from 'react-router';
+import { RoutesProps } from 'react-router';
 import { BrowserRouterProps } from 'react-router-dom';
 import IRouteConfig from './IRouteConfig';
+import { StaticRouterProps } from 'react-router-dom/server';
 export type RouterProps = StaticRouterProps & BrowserRouterProps;
 export declare const Router: React.FunctionComponent<RouterProps>;
 export default Router;
-export type RoutedContentProps = SwitchProps & {
+export type RoutedContentProps = RoutesProps & {
     keyPrefix?: string;
     config?: IRouteConfig;
     basePath?: string;

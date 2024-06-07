@@ -116,6 +116,7 @@ export class EpiserverSpaContext {
         } });
         this._state = configureStore({ reducer: reducers });
         this._state.dispatch({ type: '@@EPI/INIT' });
+        console.log("created reduxstore");
     }
     _initEditMode() {
         if (this.isDebugActive())

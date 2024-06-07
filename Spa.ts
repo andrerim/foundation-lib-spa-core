@@ -145,6 +145,7 @@ export class EpiserverSpaContext implements IEpiserverContext, PathProvider {
         this._modules.forEach(x => { const ri = x.GetStateReducer(); if (ri) { reducers[ri.stateKey] = ri.reducer }});
         this._state = configureStore({ reducer: reducers });
         this._state.dispatch({ type: '@@EPI/INIT' });
+        console.log("created reduxstore")
     }
 
     private _initEditMode() : void

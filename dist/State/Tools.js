@@ -1,4 +1,6 @@
-export function observeStore(store, select, onChange) {
+export function observeStore(
+// @ts-ignore
+store, select, onChange) {
     let currentState;
     function handleChange() {
         const nextState = select(store.getState());
@@ -11,6 +13,7 @@ export function observeStore(store, select, onChange) {
     handleChange();
     return unsubscribe;
 }
+// @ts-ignore
 export function setLanguage(newLanguage, store) {
     const action = {
         type: 'OptiContentCloud/SetState',
